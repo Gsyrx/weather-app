@@ -1,5 +1,6 @@
-const request = require('request');
+// const request = require('request');
 const geocode = require('./utils/geocode');
+const forecast = require('./utils/forecast');
 
 // const url =
 //   'http://api.weatherstack.com/current?access_key=0eb1f93b4a9074ef54c45dab3c06d391&query=37.8267,-122.4233&units=f';
@@ -43,7 +44,67 @@ const geocode = require('./utils/geocode');
 //   }
 // });
 
-geocode('Boston', (error, data) => {
-  console.log('Error', error);
-  console.log('Data', data);
-});
+// geocode('Boston', (error, data) => {
+//   console.log('Error', error);
+//   console.log('Data', data);
+// });
+
+// forecast(44.1545, -75.7088, (error, data) => {
+//   console.log('Error', error);
+//   console.log('Data', data);
+// });
+
+// geocode('Boston', (error, data) => {
+//   if (error) {
+//     return console.log(error);
+//   }
+
+//   forecast(data.latitude, data.longitude, (error, forecastData) => {
+//     if (error) {
+//       return console.log(error);
+//     }
+//     console.log(data.location);
+//     console.log(forecastData);
+//   });
+// });
+
+// const address = process.argv[2];
+
+// if (!address) {
+//   console.log('Please provide an address');
+// } else {
+//   geocode(address, (error, data) => {
+//     if (error) {
+//       return console.log(error);
+//     }
+
+//     forecast(data.latitude, data.longitude, (error, forecastData) => {
+//       if (error) {
+//         return console.log(error);
+//       }
+//       console.log(data.location);
+//       console.log(forecastData);
+//     });
+//   });
+// }
+// <-- Destructuring -->
+
+const address = process.argv[2];
+
+if (!address) {
+  console.log('Please provide an address');
+} else {
+  geocode(address, (error, { latitude, longitude, location } = {}) => {
+    if (error) {
+      return console.log(error);
+    }
+
+    forecast(latitude, longitude, (error, forecastData) => {
+      if (error) {
+        return console.log(error);
+      }
+      console.log(location);
+      console.log(forecastData);
+    });
+  });
+}
