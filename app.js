@@ -9,6 +9,7 @@ const forecast = require('./utils/forecast');
 //   // console.log(response);
 //   // const data = JSON.parse(response.body);
 //   // console.log(data.current);
+//   // when we write (json: true) , we don't need to parse the response body
 //   // console.log(response.body.current);
 
 //   // console.log(error);
@@ -87,6 +88,7 @@ const forecast = require('./utils/forecast');
 //     });
 //   });
 // }
+
 // <-- Destructuring -->
 
 const address = process.argv[2];
